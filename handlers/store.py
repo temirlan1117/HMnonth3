@@ -5,7 +5,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 
 
-class FSM_store(StatesGroup):
+class fsm_store(StatesGroup):
     name = State()
     size = State()
     category = State()
@@ -15,7 +15,7 @@ class FSM_store(StatesGroup):
 
 async def start_fsm_reg(message: types.Message, ):
     await message.answer("введите название товара")
-    await FSM_store.name.set()
+    await fsm_store.name.set()
 
 
 async def name_load(message: types.Message, state: FSMContext):
@@ -31,7 +31,7 @@ async def name_load(message: types.Message, state: FSMContext):
     size.add(size_1, size_2,
              size_3, size_4)
     await message.answer('выберете размер ', reply_markup=size)
-    await FSM_store.next()
+    await fsm_store.next()
 
 
 
@@ -41,7 +41,7 @@ async def size_load(message: types.Message, state: FSMContext):
         data['size'] = message.text
 
     await message.answer('назовите категорию',reply_markup=ReplyKeyboardRemove())
-    await FSM_store.next()
+    await fsm_store.next()
 
 
 async def category_load(message: types.Message, state: FSMContext):
@@ -49,7 +49,7 @@ async def category_load(message: types.Message, state: FSMContext):
         data['category'] = message.text
 
         await message.answer('назовите стоимость')
-        await FSM_store.next()
+        await fsm_store.next()
 
 
 async def value_load(message: types.Message, state: FSMContext):
@@ -57,7 +57,7 @@ async def value_load(message: types.Message, state: FSMContext):
         data['value'] = message.text
 
     await message.answer('добавьте фото')
-    await FSM_store.next()
+    await fsm_store.next()
 
 
 async def photo_load(message: types.Message, state: FSMContext):
@@ -76,10 +76,10 @@ async def photo_load(message: types.Message, state: FSMContext):
 
 
 def register_fsm_reg(dp: Dispatcher):
-    dp.register_message_handler(start_fsm_reg, commands=['store'])
-    dp.register_message_handler(name_load, state=FSM_store.name)
-    dp.register_message_handler(size_load, state=FSM_store.size)
-    dp.register_message_handler(category_load, state=FSM_store.category)
-    dp.register_message_handler(value_load, state=FSM_store.value)
-    dp.register_message_handler(photo_load, state=FSM_store.photo,
+    dp.register_message_handler(start_fsm_reg, commands=['магазин'])
+    dp.register_message_handler(name_load, state=fsm_store.name)
+    dp.register_message_handler(size_load, state=fsm_store.size)
+    dp.register_message_handler(category_load, state=fsm_store.category)
+    dp.register_message_handler(value_load, state=fsm_store.value)
+    dp.register_message_handler(photo_load, state=fsm_store.photo,
                                 content_types=['photo'])
