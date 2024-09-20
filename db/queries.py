@@ -28,3 +28,15 @@ INSERT_INTO_PRODUCT_DETAIL='''
 INSERT INTO product_detail (productid, category, info_product) VALUES (?, ?, ?)
 
 '''
+
+
+CREATE_TABLE_COLLECTION_PRODUCTS = """
+    CREATE TABLE IF NOT EXISTS collection_products (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id INTEGER,
+    collection_products VARCHAR(255)
+    )"""
+
+INSERT_COLLECTION_PRODUCTS = """
+INSERT INTO collection_products (product_id, collection_products) VALUES (?, ?)
+"""
