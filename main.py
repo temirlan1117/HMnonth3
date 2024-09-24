@@ -1,6 +1,8 @@
+from lib2to3.pgen2.tokenize import group
+
 from aiogram import executor
 from config import dp, bot
-from handlers import  echo, commands,quiz, store, FSM_store
+from handlers import  echo, commands,quiz, store, FSM_store,webapp, group
 
 from db import db_main
 
@@ -11,6 +13,9 @@ commands.register_commands(dp)
 quiz.register_quiz_1(dp)
 store.register_fsm_reg(dp)
 FSM_store.register_store(dp)
+webapp.register_handlers_webapp(dp)
+group.register_group(dp)
+
 echo.register_echo(dp)
 
 
